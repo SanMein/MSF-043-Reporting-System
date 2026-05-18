@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSF | Заполнитель рапортов</title>
+    <link rel="stylesheet" href="css/report-style.css">
+    <link rel="icon" type="image/png" href="assets/msf-logo.png">
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <header class="header">
+        <div class="header-content">
+            <img src="assets/msf-logo.png" alt="MSF" class="logo">
+            <div class="title">
+                <h1>ЗАПОЛНИТЕЛЬ РАПОРТОВ MSF</h1>
+                <span class="subtitle">СИСТЕМА ОФОРМЛЕНИЯ ДОКУМЕНТАЦИИ</span>
+            </div>
+            <div class="access-display">
+                <span>УРОВЕНЬ ДОСТУПА: </span>
+                <span id="access-level" class="access-level delta">Δ-DELTA</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="panel">
+            <h2>ФОРМА ЗАПОЛНЕНИЯ РАПОРТА</h2>
+            <p class="panel-description">Выберите тип документа для заполнения</p>
+
+            <div class="report-type-selector">
+                <label class="report-type-card">
+                    <input type="radio" name="reportType" value="promotion">
+                    <div class="report-type-content">
+                        <span class="report-type-title">Рапорт о предоставлении к повышению</span>
+                        <span class="report-type-access">Требуемый доступ: Gamma и выше</span>
+                    </div>
+                </label>
+                <label class="report-type-card">
+                    <input type="radio" name="reportType" value="discipline">
+                    <div class="report-type-content">
+                        <span class="report-type-title">Рапорт о предоставлении к дисциплинарному взысканию или понижению</span>
+                        <span class="report-type-access">Требуемый доступ: Gamma и выше</span>
+                    </div>
+                </label>
+                <label class="report-type-card">
+                    <input type="radio" name="reportType" value="absence">
+                    <div class="report-type-content">
+                        <span class="report-type-title">Рапорт об отсутствии</span>
+                        <span class="report-type-access">Доступ: Delta и выше (стандарт)</span>
+                    </div>
+                </label>
+            </div>
+
+            <div id="report-form-container" class="report-form-container hidden">
+                <div class="two-columns">
+                    <div class="form-column">
+                        <!-- Форма рапорта о повышении -->
+                        <div id="promotion-form" class="report-form hidden">
+                            <h3>Данные заявителя</h3>
+                            <div class="form-group">
+                                <label>ПОЗЫВНОЙ (ЗАЯВИТЕЛЬ)</label>
+                                <input type="text" id="promo-callsign1" class="form-input" placeholder="пример: HAWK" maxlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label>MSF-D-КОД (ЗАЯВИТЕЛЬ)</label>
+                                <input type="text" id="promo-msfcode1" class="form-input" placeholder="MSF-D-XXXXXX-X">
+                            </div>
+                            <div class="form-group">
+                                <label>ГРЕЙД (ЗАЯВИТЕЛЬ)</label>
+                                <select id="promo-grade1" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="K1">K1</option>
+                                    <option value="K2">K2</option>
+                                    <option value="K3">K3</option>
+                                    <option value="K4">K4</option>
+                                    <option value="K5">K5</option>
+                                    <option value="K6">K6</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>ДОЛЖНОСТЬ (ЗАЯВИТЕЛЬ)</label>
+                                <select id="promo-position" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="Инструктор">Инструктор</option>
+                                    <option value="Старший Оперативник">Старший Оперативник</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>СЛУЖБА (ЗАЯВИТЕЛЬ)</label>
+                                <select id="promo-service1" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="SSC">SSC</option>
+                                    <option value="RSC">RSC</option>
+                                    <option value="MSC">MSC</option>
+                                    <option value="TSC">TSC</option>
+                                </select>
+                            </div>
+
+                            <h3>Данные предоставляемого оперативника</h3>
+                            <div class="form-group">
+                                <label>ПОЗЫВНОЙ (ПРЕДОСТАВЛЯЕМЫЙ)</label>
+                                <input type="text" id="promo-callsign2" class="form-input" placeholder="пример: WOLF" maxlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label>MSF-D-КОД (ПРЕДОСТАВЛЯЕМЫЙ)</label>
+                                <input type="text" id="promo-msfcode2" class="form-input" placeholder="MSF-D-XXXXXX-X">
+                            </div>
+                            <div class="form-group">
+                                <label>ГРЕЙД (ПРЕДОСТАВЛЯЕМЫЙ)</label>
+                                <select id="promo-grade2" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="K1">K1</option>
+                                    <option value="K2">K2</option>
+                                    <option value="K3">K3</option>
+                                    <option value="K4">K4</option>
+                                    <option value="K5">K5</option>
+                                    <option value="K6">K6</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>СЛУЖБА (ПРЕДОСТАВЛЯЕМЫЙ)</label>
+                                <select id="promo-service2" class="form-select" data-service-select="promo">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="SSC">SSC</option>
+                                    <option value="RSC">RSC</option>
+                                    <option value="MSC">MSC</option>
+                                    <option value="TSC">TSC</option>
+                                </select>
+                            </div>
+
+                            <h3>Обстоятельства</h3>
+                            <div class="form-group">
+                                <label>ДАТА ОПЕРАЦИИ / МЕРОПРИЯТИЯ</label>
+                                <input type="date" id="promo-date" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label>ОСНОВАНИЕ</label>
+                                <select id="promo-basis" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="operation">Операция</option>
+                                    <option value="event">Мероприятие</option>
+                                </select>
+                            </div>
+
+                            <div id="promo-operation-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>НАИМЕНОВАНИЕ ОПЕРАЦИИ</label>
+                                    <input type="text" id="promo-operation-name" class="form-input" maxlength="32" placeholder="до 32 символов">
+                                </div>
+                                <div class="form-group">
+                                    <label>КРАТКОЕ ОПИСАНИЕ ОПЕРАЦИИ</label>
+                                    <textarea id="promo-operation-desc" class="form-textarea" maxlength="128" rows="3" placeholder="до 128 символов"></textarea>
+                                </div>
+                            </div>
+
+                            <div id="promo-event-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ТИП МЕРОПРИЯТИЯ</label>
+                                    <select id="promo-event-type" class="form-select">
+                                        <option value="">-- ВЫБЕРИТЕ --</option>
+                                        <option value="Боевая операция">Боевая операция</option>
+                                        <option value="Тренировка">Тренировка</option>
+                                        <option value="Рейд">Рейд</option>
+                                        <option value="Аттестация">Аттестация</option>
+                                        <option value="Иное">Иное</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>КРАТКОЕ ОПИСАНИЕ МЕРОПРИЯТИЯ</label>
+                                    <textarea id="promo-event-desc" class="form-textarea" maxlength="128" rows="3" placeholder="до 128 символов"></textarea>
+                                </div>
+                            </div>
+
+                            <h3>Оценка действий</h3>
+                            <div class="form-group">
+                                <label>ТАКТИЧЕСКАЯ ГРАМОТНОСТЬ (до 256 символов)</label>
+                                <textarea id="promo-tactical" class="form-textarea" maxlength="256" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>ВЗАИМОДЕЙСТВИЕ С ГРУППОЙ (до 256 символов)</label>
+                                <textarea id="promo-teamwork" class="form-textarea" maxlength="256" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>ВЛАДЕНИЕ ОРУЖИЕМ И СНАРЯЖЕНИЕМ (до 256 символов)</label>
+                                <textarea id="promo-weapon" class="form-textarea" maxlength="256" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>ИНИЦИАТИВА И ЛИДЕРСКИЕ КАЧЕСТВА (до 256 символов)</label>
+                                <textarea id="promo-leadership" class="form-textarea" maxlength="256" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>ДОПОЛНИТЕЛЬНЫЕ НАБЛЮДЕНИЯ (до 256 символов)</label>
+                                <textarea id="promo-extra" class="form-textarea" maxlength="256" rows="2"></textarea>
+                            </div>
+
+                            <h3>Рекомендация</h3>
+                            <div class="form-group">
+                                <label>ТИП ПОВЫШЕНИЯ</label>
+                                <select id="promo-type" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="combat">О повышении основного боевого грейда</option>
+                                    <option value="specialized">О повышении специализированного грейда</option>
+                                </select>
+                            </div>
+
+                            <div id="promo-combat-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>НОВЫЙ ГРЕЙД</label>
+                                    <select id="promo-new-grade" class="form-select">
+                                        <option value="">-- ВЫБЕРИТЕ --</option>
+                                        <option value="K1">K1</option>
+                                        <option value="K2">K2</option>
+                                        <option value="K3">K3</option>
+                                        <option value="K4">K4</option>
+                                        <option value="K5">K5</option>
+                                        <option value="K6">K6</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="promo-specialized-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>СПЕЦИАЛИЗИРОВАННЫЙ ГРЕЙД</label>
+                                    <select id="promo-specialized-grade" class="form-select">
+                                        <option value="">-- ВЫБЕРИТЕ --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>ОБОСНОВАНИЕ (до 128 символов)</label>
+                                <textarea id="promo-justification" class="form-textarea" maxlength="128" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Форма рапорта о дисциплинарном взыскании -->
+                        <div id="discipline-form" class="report-form hidden">
+                            <h3>Данные заявителя</h3>
+                            <div class="form-group">
+                                <label>ПОЗЫВНОЙ (ЗАЯВИТЕЛЬ)</label>
+                                <input type="text" id="disc-callsign1" class="form-input" placeholder="пример: HAWK" maxlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label>MSF-D-КОД (ЗАЯВИТЕЛЬ)</label>
+                                <input type="text" id="disc-msfcode1" class="form-input" placeholder="MSF-D-XXXXXX-X">
+                            </div>
+                            <div class="form-group">
+                                <label>ГРЕЙД (ЗАЯВИТЕЛЬ)</label>
+                                <select id="disc-grade1" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="K1">K1</option>
+                                    <option value="K2">K2</option>
+                                    <option value="K3">K3</option>
+                                    <option value="K4">K4</option>
+                                    <option value="K5">K5</option>
+                                    <option value="K6">K6</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>ДОЛЖНОСТЬ (ЗАЯВИТЕЛЬ)</label>
+                                <select id="disc-position" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="Инструктор">Инструктор</option>
+                                    <option value="Старший Оперативник">Старший Оперативник</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>СЛУЖБА (ЗАЯВИТЕЛЬ)</label>
+                                <select id="disc-service1" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="SSC">SSC</option>
+                                    <option value="RSC">RSC</option>
+                                    <option value="MSC">MSC</option>
+                                    <option value="TSC">TSC</option>
+                                </select>
+                            </div>
+
+                            <h3>Данные оперативника, в отношении которого подаётся рапорт</h3>
+                            <div class="form-group">
+                                <label>ПОЗЫВНОЙ (НАРУШИТЕЛЬ)</label>
+                                <input type="text" id="disc-callsign2" class="form-input" placeholder="пример: WOLF" maxlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label>MSF-D-КОД (НАРУШИТЕЛЬ)</label>
+                                <input type="text" id="disc-msfcode2" class="form-input" placeholder="MSF-D-XXXXXX-X">
+                            </div>
+                            <div class="form-group">
+                                <label>ГРЕЙД (НАРУШИТЕЛЬ)</label>
+                                <select id="disc-grade2" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="K1">K1</option>
+                                    <option value="K2">K2</option>
+                                    <option value="K3">K3</option>
+                                    <option value="K4">K4</option>
+                                    <option value="K5">K5</option>
+                                    <option value="K6">K6</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>СЛУЖБА (НАРУШИТЕЛЬ)</label>
+                                <select id="disc-service2" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="SSC">SSC</option>
+                                    <option value="RSC">RSC</option>
+                                    <option value="MSC">MSC</option>
+                                    <option value="TSC">TSC</option>
+                                </select>
+                            </div>
+
+                            <h3>Обстоятельства нарушения</h3>
+                            <div class="form-group">
+                                <label>ДАТА ИНЦИДЕНТА</label>
+                                <input type="date" id="disc-date" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label>МЕСТО ИНЦИДЕНТА</label>
+                                <select id="disc-location" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="Канал Discord">Канал Discord</option>
+                                    <option value="Голосовой канал">Голосовой канал</option>
+                                    <option value="В ходе операции или мероприятия">В ходе операции или мероприятия</option>
+                                    <option value="Иное">Иное</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>ТИП НАРУШЕНИЯ</label>
+                                <select id="disc-violation-type" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="reglament">Нарушение пункта Регламента</option>
+                                    <option value="regulation">Нарушение Положения</option>
+                                    <option value="order">Неисполнение прямого приказа командира</option>
+                                    <option value="desertion">Дезертирство / самовольное оставление операции</option>
+                                    <option value="reputation">Действия, нанёсшие ущерб репутации ЧВК</option>
+                                    <option value="other">Иное</option>
+                                </select>
+                            </div>
+
+                            <div id="disc-reglament-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ПУНКТ РЕГЛАМЕНТА</label>
+                                    <select id="disc-reglament-point" class="form-select">
+                                        <option value="">-- ВЫБЕРИТЕ --</option>
+                                        <option value="3.1">3.1</option>
+                                        <option value="3.2">3.2</option>
+                                        <option value="3.3">3.3</option>
+                                        <option value="3.4">3.4</option>
+                                        <option value="3.5">3.5</option>
+                                        <option value="3.6">3.6</option>
+                                        <option value="4.1">4.1</option>
+                                        <option value="4.2">4.2</option>
+                                        <option value="4.3">4.3</option>
+                                        <option value="4.4">4.4</option>
+                                        <option value="4.5">4.5</option>
+                                        <option value="5.1-5.9">5.1-5.9</option>
+                                        <option value="7.1-7.6">7.1-7.6</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="disc-regulation-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ПОЛОЖЕНИЕ</label>
+                                    <select id="disc-regulation-doc" class="form-select">
+                                        <option value="">-- ВЫБЕРИТЕ --</option>
+                                        <option value="Положение о системе Карбогрейда личного состава ЧВК «MSF-043»">Положение о системе Карбогрейда личного состава ЧВК "MSF-043"</option>
+                                        <option value="Положение о порядке оснащения личного состава в режиме «BRM5» ЧВК «MSF-043»">Положение о порядке оснащения личного состава в режиме "BRM5" ЧВК "MSF-043"</option>
+                                        <option value="Положение о применении системы сигналов и команд ЧВК «MSF-043»">Положение о применении системы сигналов и команд ЧВК "MSF-043"</option>
+                                        <option value="Положение о применении техники в режиме BRM5 ЧВК «MSF-043»">Положение о применении техники в режиме BRM5 ЧВК "MSF-043"</option>
+                                        <option value="Положение об унификации экипировки личного состава в режиме «BRM5» ЧВК «MSF-043»">Положение об унификации экипировки личного состава в режиме "BRM5" ЧВК "MSF-043"</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>ПОЯСНЕНИЕ</label>
+                                    <textarea id="disc-regulation-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+                                </div>
+                            </div>
+
+                            <div id="disc-order-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ПОЯСНЕНИЕ</label>
+                                    <textarea id="disc-order-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+                                </div>
+                            </div>
+
+                            <div id="disc-desertion-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ПОЯСНЕНИЕ</label>
+                                    <textarea id="disc-desertion-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+                                </div>
+                            </div>
+
+                            <div id="disc-reputation-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ПОЯСНЕНИЕ</label>
+                                    <textarea id="disc-reputation-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+                                </div>
+                            </div>
+
+                            <div id="disc-other-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ПОЯСНЕНИЕ</label>
+                                    <textarea id="disc-other-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+                                </div>
+                            </div>
+
+                            <h3>Описание инцидента</h3>
+                            <div class="form-group">
+                                <label>СУТЬ НАРУШЕНИЯ (до 256 символов)</label>
+                                <textarea id="disc-essence" class="form-textarea" maxlength="256" rows="3" placeholder="до 256 символов"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>СВИДЕТЕЛИ (ПОЗЫВНОЙ | MSF-D-КОД | ГРЕЙД)</label>
+                                <textarea id="disc-witnesses" class="form-textarea" rows="3" placeholder="пример: HAWK | MSF-D-123456-7 | K3 / +"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>ПРЕДШЕСТВУЮЩИЕ НАРУШЕНИЯ (до 128 символов)</label>
+                                <textarea id="disc-prev-violations" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов / -"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>ОБЪЯСНЕНИЯ ОПЕРАТИВНИКА (до 128 символов)</label>
+                                <textarea id="disc-explanation" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов / -"></textarea>
+                            </div>
+
+                            <h3>Рекомендация</h3>
+                            <div class="form-group">
+                                <label>ВИД ВЗЫСКАНИЯ</label>
+                                <select id="disc-penalty-type" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="suspension">Временное отстранение от участия в операциях</option>
+                                    <option value="downgrade-combat">Понижение основного боевого грейда</option>
+                                    <option value="downgrade-specialized">Понижение специализированного грейда</option>
+                                    <option value="revoke-specialized">Лишение специализированного грейда</option>
+                                    <option value="ku-status">Перевод в статус Ку с повторным прохождением аттестации</option>
+                                    <option value="expulsion">Исключение из состава ЧВК и Перманентный бан</option>
+                                </select>
+                            </div>
+
+                            <div id="disc-suspension-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>СРОК ОТСТРАНЕНИЯ</label>
+                                    <input type="text" id="disc-suspension-term" class="form-input" maxlength="32" placeholder="до 32 символов">
+                                </div>
+                            </div>
+
+                            <div id="disc-downgrade-combat-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>НОВЫЙ ОСНОВНОЙ ГРЕЙД</label>
+                                    <select id="disc-new-grade" class="form-select">
+                                        <option value="">-- ВЫБЕРИТЕ --</option>
+                                        <option value="K1">K1</option>
+                                        <option value="K2">K2</option>
+                                        <option value="K3">K3</option>
+                                        <option value="K4">K4</option>
+                                        <option value="K5">K5</option>
+                                        <option value="K6">K6</option>
+                                        <option value="Ku">Ku</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="disc-downgrade-specialized-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>НОВЫЙ СПЕЦИАЛИЗИРОВАННЫЙ ГРЕЙД</label>
+                                    <select id="disc-new-specialized" class="form-select">
+                                        <option value="">-- ВЫБЕРИТЕ --</option>
+                                        <option value="SSC-1">SSC-1</option>
+                                        <option value="SSC-2">SSC-2</option>
+                                        <option value="SSC-3">SSC-3</option>
+                                        <option value="SSC-4">SSC-4</option>
+                                        <option value="RSC-1">RSC-1</option>
+                                        <option value="RSC-2">RSC-2</option>
+                                        <option value="RSC-3">RSC-3</option>
+                                        <option value="RSC-4">RSC-4</option>
+                                        <option value="MSC-1">MSC-1</option>
+                                        <option value="MSC-2">MSC-2</option>
+                                        <option value="MSC-3">MSC-3</option>
+                                        <option value="TSC-1">TSC-1</option>
+                                        <option value="TSC-2">TSC-2</option>
+                                        <option value="TSC-3">TSC-3</option>
+                                        <option value="TSC-4">TSC-4</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>ОБОСНОВАНИЕ РЕКОМЕНДУЕМОЙ МЕРЫ (до 128 символов)</label>
+                                <textarea id="disc-justification" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов"></textarea>
+                            </div>
+
+                            <h3>Приложения</h3>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label"><input type="checkbox" id="disc-app-screenshots"> Скриншоты</label>
+                                <label class="checkbox-label"><input type="checkbox" id="disc-app-logs"> Записи</label>
+                                <label class="checkbox-label"><input type="checkbox" id="disc-app-witness"> Свидетельские показания</label>
+                                <label class="checkbox-label"><input type="checkbox" id="disc-app-mission"> Выписка из Журнала боевых миссий</label>
+                            </div>
+                            <div class="form-group">
+                                <label>ИНОЕ (до 64 символов)</label>
+                                <input type="text" id="disc-app-other" class="form-input" maxlength="64" placeholder="до 64 символов">
+                            </div>
+                        </div>
+
+                        <!-- Форма рапорта об отсутствии -->
+                        <div id="absence-form" class="report-form hidden">
+                            <h3>Данные заявителя</h3>
+                            <div class="form-group">
+                                <label>ПОЗЫВНОЙ</label>
+                                <input type="text" id="abs-callsign" class="form-input" placeholder="пример: HAWK" maxlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label>MSF-D-КОД</label>
+                                <input type="text" id="abs-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
+                            </div>
+                            <div class="form-group">
+                                <label>ОСНОВНОЙ ГРЕЙД</label>
+                                <select id="abs-grade" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="Ku">Ku</option>
+                                    <option value="K1">K1</option>
+                                    <option value="K2">K2</option>
+                                    <option value="K3">K3</option>
+                                    <option value="K4">K4</option>
+                                    <option value="K5">K5</option>
+                                    <option value="K6">K6</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>СПЕЦИАЛИЗИРОВАННЫЙ ГРЕЙД</label>
+                                <select id="abs-service" class="form-select">
+                                    <option value="Отсутствует">Отсутствует</option>
+                                    <option value="SSC">SSC</option>
+                                    <option value="RSC">RSC</option>
+                                    <option value="MSC">MSC</option>
+                                    <option value="TSC">TSC</option>
+                                    <option value="ERS">ERS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>ДОЛЖНОСТЬ</label>
+                                <select id="abs-position" class="form-select">
+                                    <option value="Отсутствует">Отсутствует</option>
+                                    <option value="Модератор">Модератор</option>
+                                    <option value="Инструктор">Инструктор</option>
+                                    <option value="Аналитик">Аналитик</option>
+                                    <option value="Логист">Логист</option>
+                                </select>
+                            </div>
+
+                            <h3>Период отсутствия</h3>
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label>НАЧАЛО (ДАТА)</label>
+                                    <input type="date" id="abs-start-date" class="form-input">
+                                </div>
+                                <div class="form-group half">
+                                    <label>НАЧАЛО (ВРЕМЯ)</label>
+                                    <input type="time" id="abs-start-time" class="form-input">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>ОКОНЧАНИЕ (ДАТА)</label>
+                                <input type="date" id="abs-end-date" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label>ОРИЕНТИРОВОЧНАЯ ПРОДОЛЖИТЕЛЬНОСТЬ</label>
+                                <input type="text" id="abs-duration" class="form-input" placeholder='пример: "3 дня" / "5 часов"'>
+                            </div>
+
+                            <h3>Причина отсутствия</h3>
+                            <div class="form-group">
+                                <label>ОСНОВНАЯ КАТЕГОРИЯ</label>
+                                <select id="abs-reason-cat" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="Личные обстоятельства">Личные обстоятельства</option>
+                                    <option value="Медицинская необходимость">Медицинская необходимость</option>
+                                    <option value="Техническая невозможность">Техническая невозможность</option>
+                                    <option value="Логистическая невозможность">Логистическая невозможность</option>
+                                    <option value="Учебная / Рабочая занятость">Учебная / Рабочая занятость</option>
+                                    <option value="Иное">Иное</option>
+                                </select>
+                            </div>
+                            <div id="abs-reason-other-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ДЕТАЛИЗАЦИЯ ПРИЧИНЫ (до 128 символов)</label>
+                                    <input type="text" id="abs-reason-other" class="form-input" maxlength="128" placeholder="до 128 символов">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>ДЕТАЛИЗАЦИЯ ПРИЧИНЫ (до 64 символов)</label>
+                                <input type="text" id="abs-reason-detail" class="form-input" maxlength="64" placeholder="до 64 символов">
+                            </div>
+
+                            <h3>Статус обязанностей на период отсутствия</h3>
+                            <div class="form-group">
+                                <label>УРОВЕНЬ ДОСТУПНОСТИ</label>
+                                <select id="abs-availability" class="form-select">
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="Полное отсутствие – не могу выполнять обязанности ни в каком виде">Полное отсутствие – не могу выполнять обязанности ни в каком виде</option>
+                                    <option value="Частичное присутствие – могу заходить в Discord, читать каналы, но не участвовать в операциях">Частичное присутствие – могу заходить в Discord, читать каналы, но не участвовать в операциях</option>
+                                    <option value="Дистанционное выполнение – могу выполнять административную / логистическую работу">Дистанционное выполнение – могу выполнять административную / логистическую работу</option>
+                                </select>
+                            </div>
+
+                            <h3>Замещение</h3>
+                            <div class="form-group">
+                                <label>НЕОБХОДИМОСТЬ ЗАМЕЩЕНИЯ</label>
+                                <select id="abs-substitution-need" class="form-select">
+                                    <option value="Замещение не требуется">Замещение не требуется</option>
+                                    <option value="Требуется замещение">Требуется замещение</option>
+                                    <option value="Вопрос замещения оставляю на усмотрение командования">Вопрос замещения оставляю на усмотрение командования</option>
+                                </select>
+                            </div>
+
+                            <div id="abs-substitution-block" class="conditional-block hidden">
+                                <div class="form-group">
+                                    <label>ПОЗЫВНОЙ ЗАМЕЩАЮЩЕГО</label>
+                                    <input type="text" id="abs-sub-callsign" class="form-input" maxlength="8">
+                                </div>
+                                <div class="form-group">
+                                    <label>MSF-D-КОД ЗАМЕЩАЮЩЕГО</label>
+                                    <input type="text" id="abs-sub-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
+                                </div>
+                                <div class="form-group">
+                                    <label>ГРЕЙД ЗАМЕЩАЮЩЕГО (ОСНОВНОЙ/СЛУЖБА)</label>
+                                    <input type="text" id="abs-sub-grade" class="form-input" placeholder="пример: K3/SSC">
+                                </div>
+                                <div class="form-group">
+                                    <label>ПЕРЕДАННЫЕ ЗАДАЧИ / ОБЯЗАННОСТИ (до 128 символов)</label>
+                                    <textarea id="abs-sub-tasks" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов / -"></textarea>
+                                </div>
+                            </div>
+
+                            <h3>Дополнительная информация</h3>
+                            <div class="form-group">
+                                <label>ПРИМЕЧАНИЯ (до 256 символов)</label>
+                                <textarea id="abs-notes" class="form-textarea" maxlength="256" rows="3" placeholder="до 256 символов / -"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="preview-column">
+                        <div class="preview-header">
+                            <span>ПРЕДВАРИТЕЛЬНЫЙ ПРОСМОТР</span>
+                            <button id="copy-preview-btn" class="copy-preview-btn">КОПИРОВАТЬ</button>
+                            <button id="send-webhook-btn" class="send-webhook-btn">ОТПРАВИТЬ В DISCORD</button>
+                        </div>
+                        <div id="report-preview" class="report-preview">
+                            <p class="preview-placeholder">Выберите тип рапорта и заполните форму</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="access-input">
+                <span>> КОД ДОСТУПА: </span>
+                <input type="text" id="access-code-input" placeholder="Введите код доступа" maxlength="60">
+            </div>
+        </div>
+    </footer>
+
+    <div id="notification" class="notification hidden"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/prom.js"></script>
+    <script src="js/disc.js"></script>
+    <script src="js/abs.js"></script>
+</body>
+</html>
