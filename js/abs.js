@@ -1,4 +1,4 @@
-// js/abs.js
+// js/abs.js - Модуль рапорта об отсутствии (05-REP-ABS)
 class AbsReportModule {
     constructor() {
         this.setupListeners();
@@ -102,8 +102,8 @@ class AbsReportModule {
         preview += `### Статус обязанностей на период отсутствия\n`;
         preview += `**[УРОВЕНЬ ДОСТУПНОСТИ]**:\n[ ] ${availability}\n\n`;
         preview += `———————————————————————\n\n`;
-        preview += `### Замещение\n`;
-        preview += substitutionText\n;
+        preview += `### Замещение`;
+        preview += substitutionText + '\n\n';
         preview += `———————————————————————\n\n`;
         preview += `### Дополнительная информация\n`;
         preview += `**ПРИМЕЧАНИЯ**:\n${notes}\n\n`;
