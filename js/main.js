@@ -1,75 +1,30 @@
-// js/main.js
+// js/main.js - Главный контроллер
 class ReportMain {
     constructor() {
         this.currentAccessLevel = 'delta';
         this.currentReportType = null;
-        this.promModule = null;
-        this.discModule = null;
-        this.absModule = null;
+        this.modules = {};
         this.init();
     }
 
-    init() {
+    async init() {
         this.setupEventListeners();
         this.setupAccessControl();
-        this.initModules();
+        await this.initModules();
     }
 
-    initModules() {
-        this.promModule = new PromReportModule();
-        this.discModule = new DiscReportModule();
-        this.absModule = new AbsReportModule();
-    }
+    async initModules() {
+        this.modules.prom = new PromReportModule();
+        this.modules.disc = new DiscReportModule();
+        this.modules.abs = new AbsReportModule();
+        this.modules.leave = new LeaveReportModule();
+        this.modules.operation = new OperationReportModule();
 
-    sendToWebhook() {
-        const previewDiv = document.getElementById('report-preview');
-        let reportText = previewDiv.innerText;
-
-        if (!reportText || reportText === 'Выберите тип рапорта и заполните форму') {
-            this.showNotification('Нет данных для отправки. Заполните форму рапорта.', 'warning');
-            return;
-        }
-
-        const webhookUrl = 'https://discord.com/api/webhooks/1372820167075041330/VIn6cK4PQ0WAN3ADJJ8VdGhKDp_xfEpJgREEbTVgwQcxZ7laxc-mwIy6R9sUWsuLILye';
-
-        const payload = {
-            content: null,
-            embeds: [{
-                title: `РАПОРТ | ${this.currentReportType ? this.currentReportType.toUpperCase() : 'UNKNOWN'}`,
-                description: '```' + reportText + '```',
-                color: 0x7c4dff,
-                footer: {
-                    text: `MSF-043 | Reporting System | ${new Date().toLocaleString('ru-RU')}`
-                },
-                timestamp: new Date().toISOString()
-            }]
-        };
-
-        // Ограничение Discord: embed description не более 4096 символов
-        if (reportText.length > 4096) {
-            payload.embeds[0].description = '```' + reportText.substring(0, 3950) + '\n...[ТЕКСТ ОБРЕЗАН ИЗ-ЗА ЛИМИТА DISCORD]```';
-        }
-
-        this.showNotification('Отправка рапорта в Discord...', 'info');
-
-        fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (response.ok) {
-                this.showNotification('Рапорт успешно отправлен в Discord', 'success');
-            } else {
-                return response.text().then(text => { throw new Error(`Ошибка ${response.status}: ${text}`); });
-            }
-        })
-        .catch(error => {
-            console.error('Webhook error:', error);
-            this.showNotification('Ошибка отправки: ' + error.message, 'error');
-        });
+        window.promModule = this.modules.prom;
+        window.discModule = this.modules.disc;
+        window.absModule = this.modules.abs;
+        window.leaveModule = this.modules.leave;
+        window.operationModule = this.modules.operation;
     }
 
     setupEventListeners() {
@@ -79,26 +34,33 @@ class ReportMain {
             });
         });
 
-        document.getElementById('copy-preview-btn').addEventListener('click', () => {
-            this.copyPreview();
-        });
+        const copyBtn = document.getElementById('copy-preview-btn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => this.copyPreview());
+        }
 
-        document.getElementById('send-webhook-btn').addEventListener('click', () => {
-            this.sendToWebhook();
-        });
+        const sendBtn = document.getElementById('send-webhook-btn');
+        if (sendBtn) {
+            sendBtn.addEventListener('click', () => this.sendToWebhook());
+        }
 
-        document.getElementById('access-code-input').addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                this.handleAccessCode(event.target.value.trim());
-                event.target.value = '';
-            }
-        });
+        const accessInput = document.getElementById('access-code-input');
+        if (accessInput) {
+            accessInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    this.handleAccessCode(event.target.value.trim());
+                    event.target.value = '';
+                }
+            });
+        }
     }
 
     setupAccessControl() {
         const accessLevelSpan = document.getElementById('access-level');
-        accessLevelSpan.textContent = 'Δ-DELTA';
-        accessLevelSpan.className = 'access-level delta';
+        if (accessLevelSpan) {
+            accessLevelSpan.textContent = 'Δ-DELTA';
+            accessLevelSpan.className = 'access-level delta';
+        }
     }
 
     handleAccessCode(code) {
@@ -128,8 +90,10 @@ class ReportMain {
 
         this.currentAccessLevel = newLevel;
         const accessLevelSpan = document.getElementById('access-level');
-        accessLevelSpan.textContent = level;
-        accessLevelSpan.className = `access-level ${color}`;
+        if (accessLevelSpan) {
+            accessLevelSpan.textContent = level;
+            accessLevelSpan.className = `access-level ${color}`;
+        }
 
         this.showNotification(`Уровень доступа: ${level}`, 'success');
 
@@ -141,47 +105,78 @@ class ReportMain {
     checkAccessAndReset() {
         const isGammaOrHigher = ['gamma', 'beta', 'alpha'].includes(this.currentAccessLevel);
 
-        if (!isGammaOrHigher && (this.currentReportType === 'promotion' || this.currentReportType === 'discipline')) {
+        if (!isGammaOrHigher && (this.currentReportType === 'promotion' || this.currentReportType === 'discipline' || this.currentReportType === 'operation')) {
             this.showNotification('Недостаточно прав для заполнения данного типа рапорта', 'warning');
             document.querySelectorAll('input[name="reportType"]').forEach(radio => {
                 radio.checked = false;
             });
-            document.getElementById('report-form-container').classList.add('hidden');
+            const container = document.getElementById('report-form-container');
+            if (container) container.classList.add('hidden');
             this.currentReportType = null;
         }
     }
 
-    handleReportTypeChange(type) {
+    async handleReportTypeChange(type) {
         const isGammaOrHigher = ['gamma', 'beta', 'alpha'].includes(this.currentAccessLevel);
+        const isDeltaOrHigher = ['delta', 'gamma', 'beta', 'alpha'].includes(this.currentAccessLevel);
 
+        // Promotion и Discipline требуют Gamma и выше
         if ((type === 'promotion' || type === 'discipline') && !isGammaOrHigher) {
             this.showNotification('Доступ запрещён. Требуется уровень Gamma и выше.', 'error');
-            document.querySelector(`input[value="${type}"]`).checked = false;
+            const radio = document.querySelector(`input[value="${type}"]`);
+            if (radio) radio.checked = false;
+            return;
+        }
+
+        // Operation также требует Gamma и выше (ИСПРАВЛЕНО)
+        if (type === 'operation' && !isGammaOrHigher) {
+            this.showNotification('Доступ запрещён. Требуется уровень Gamma и выше.', 'error');
+            const radio = document.querySelector(`input[value="${type}"]`);
+            if (radio) radio.checked = false;
+            return;
+        }
+
+        // Absence и Leave требуют Delta и выше
+        if ((type === 'absence' || type === 'leave') && !isDeltaOrHigher) {
+            this.showNotification('Доступ запрещён. Требуется уровень Delta и выше.', 'error');
+            const radio = document.querySelector(`input[value="${type}"]`);
+            if (radio) radio.checked = false;
             return;
         }
 
         this.currentReportType = type;
-        document.getElementById('report-form-container').classList.remove('hidden');
+        const container = document.getElementById('report-form-container');
+        if (container) container.classList.remove('hidden');
 
-        document.getElementById('promotion-form').classList.add('hidden');
-        document.getElementById('discipline-form').classList.add('hidden');
-        document.getElementById('absence-form').classList.add('hidden');
+        await window.templateLoader.loadForm(type, 'form-column');
 
-        if (type === 'promotion') {
-            document.getElementById('promotion-form').classList.remove('hidden');
-            this.promModule.updatePreview();
-        } else if (type === 'discipline') {
-            document.getElementById('discipline-form').classList.remove('hidden');
-            this.discModule.updatePreview();
-        } else if (type === 'absence') {
-            document.getElementById('absence-form').classList.remove('hidden');
-            this.absModule.updatePreview();
+        const module = this.getModuleByType(type);
+        if (module && typeof module.setupListeners === 'function') {
+            module.setupListeners();
+            setTimeout(() => module.updatePreview(), 50);
         }
+    }
+
+    getModuleByType(type) {
+        const mapping = {
+            'promotion': this.modules.prom,
+            'discipline': this.modules.disc,
+            'absence': this.modules.abs,
+            'leave': this.modules.leave,
+            'operation': this.modules.operation
+        };
+        return mapping[type];
     }
 
     copyPreview() {
         const previewDiv = document.getElementById('report-preview');
+        if (!previewDiv) return;
+
         let textToCopy = previewDiv.innerText;
+        if (!textToCopy || textToCopy === 'Выберите тип рапорта и заполните форму') {
+            this.showNotification('Нет данных для копирования', 'warning');
+            return;
+        }
 
         navigator.clipboard.writeText(textToCopy).then(() => {
             this.showNotification('Рапорт скопирован в буфер обмена', 'success');
@@ -190,16 +185,77 @@ class ReportMain {
         });
     }
 
+    sendToWebhook() {
+        const previewDiv = document.getElementById('report-preview');
+        if (!previewDiv) return;
+
+        let reportText = previewDiv.innerText;
+
+        if (!reportText || reportText === 'Выберите тип рапорта и заполните форму') {
+            this.showNotification('Нет данных для отправки. Заполните форму рапорта.', 'warning');
+            return;
+        }
+
+        const webhookUrl = 'https://discord.com/api/webhooks/1372820167075041330/VIn6cK4PQ0WAN3ADJJ8VdGhKDp_xfEpJgREEbTVgwQcxZ7laxc-mwIy6R9sUWsuLILye';
+
+        const reportTitle = this.getReportTitle(this.currentReportType);
+
+        const payload = {
+            content: null,
+            embeds: [{
+                title: reportTitle,
+                description: reportText.substring(0, 4000) + (reportText.length > 4000 ? '\n...[ТЕКСТ ОБРЕЗАН]' : ''),
+                color: 0x7c4dff,
+                footer: {
+                    text: `MSF Reporting System | ${new Date().toLocaleString('ru-RU')}`
+                },
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        this.showNotification('Отправка рапорта в Discord...', 'info');
+
+        fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                this.showNotification('Рапорт успешно отправлен в Discord', 'success');
+            } else {
+                throw new Error(`Ошибка ${response.status}`);
+            }
+        })
+        .catch(error => {
+            console.error('Webhook error:', error);
+            this.showNotification('Ошибка отправки: ' + error.message, 'error');
+        });
+    }
+
+    getReportTitle(type) {
+        const titles = {
+            'promotion': 'РАПОРТ О ПОВЫШЕНИИ | 05-REP-PROM',
+            'discipline': 'РАПОРТ О ВЗЫСКАНИИ | 05-REP-DISC',
+            'absence': 'РАПОРТ ОБ ОТСУТСТВИИ | 05-REP-ABS',
+            'leave': 'РАПОРТ ОБ ОТПУСКЕ | 05-REP-LVE',
+            'operation': 'РАПОРТ О РЕЗУЛЬТАТЕ ОПЕРАЦИИ | 05-REP-OPR'
+        };
+        return titles[type] || 'РАПОРТ MSF';
+    }
+
     showNotification(message, type = 'info') {
         const notification = document.getElementById('notification');
+        if (!notification) return;
+
         notification.textContent = message;
         notification.className = `notification ${type}`;
         notification.classList.remove('hidden');
 
-        setTimeout(() => {
-            notification.style.opacity = '1';
-            notification.style.transform = 'translateX(0)';
-        }, 10);
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0)';
 
         setTimeout(() => {
             notification.style.opacity = '0';
