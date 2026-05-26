@@ -1,0 +1,136 @@
+<!-- Форма рапорта об отсутствии -->
+<div id="absence-form" class="report-form">
+    <h3>Данные заявителя</h3>
+    <div class="form-group">
+        <label>ПОЗЫВНОЙ</label>
+        <input type="text" id="abs-callsign" class="form-input" placeholder="пример: HAWK" maxlength="8">
+    </div>
+    <div class="form-group">
+        <label>MSF-D-КОД</label>
+        <input type="text" id="abs-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
+    </div>
+    <div class="form-group">
+        <label>ОСНОВНОЙ ГРЕЙД</label>
+        <select id="abs-grade" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="Ku">Ku</option>
+            <option value="K1">K1</option>
+            <option value="K2">K2</option>
+            <option value="K3">K3</option>
+            <option value="K4">K4</option>
+            <option value="K5">K5</option>
+            <option value="K6">K6</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>КОРПУС</label>
+        <select id="abs-service" class="form-select">
+            <option value="Отсутствует">Отсутствует</option>
+            <option value="SSC">SSC</option>
+            <option value="RSC">RSC</option>
+            <option value="MSC">MSC</option>
+            <option value="TSC">TSC</option>
+            <option value="ERS">ERS</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>ДОЛЖНОСТЬ</label>
+        <select id="abs-position" class="form-select">
+            <option value="Отсутствует">Отсутствует</option>
+            <option value="Модератор">Модератор</option>
+            <option value="Инструктор">Инструктор</option>
+            <option value="Аналитик">Аналитик</option>
+            <option value="Логист">Логист</option>
+        </select>
+    </div>
+
+    <h3>Период отсутствия</h3>
+    <div class="form-row">
+        <div class="form-group half">
+            <label>НАЧАЛО (ДАТА)</label>
+            <input type="date" id="abs-start-date" class="form-input">
+        </div>
+        <div class="form-group half">
+            <label>НАЧАЛО (ВРЕМЯ)</label>
+            <input type="time" id="abs-start-time" class="form-input">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>ОКОНЧАНИЕ (ДАТА)</label>
+        <input type="date" id="abs-end-date" class="form-input">
+    </div>
+    <div class="form-group">
+        <label>ОРИЕНТИРОВОЧНАЯ ПРОДОЛЖИТЕЛЬНОСТЬ</label>
+        <input type="text" id="abs-duration" class="form-input" placeholder='пример: "3 дня" / "5 часов"'>
+    </div>
+
+    <h3>Причина отсутствия</h3>
+    <div class="form-group">
+        <label>ОСНОВНАЯ КАТЕГОРИЯ</label>
+        <select id="abs-reason-cat" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="Личные обстоятельства">Личные обстоятельства</option>
+            <option value="Медицинская необходимость">Медицинская необходимость</option>
+            <option value="Техническая невозможность">Техническая невозможность</option>
+            <option value="Логистическая невозможность">Логистическая невозможность</option>
+            <option value="Учебная / Рабочая занятость">Учебная / Рабочая занятость</option>
+            <option value="Иное">Иное</option>
+        </select>
+    </div>
+    <div id="abs-reason-other-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ДЕТАЛИЗАЦИЯ ПРИЧИНЫ (до 128 символов)</label>
+            <input type="text" id="abs-reason-other" class="form-input" maxlength="128" placeholder="до 128 символов">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>ДЕТАЛИЗАЦИЯ ПРИЧИНЫ (до 64 символов)</label>
+        <input type="text" id="abs-reason-detail" class="form-input" maxlength="64" placeholder="до 64 символов">
+    </div>
+
+    <h3>Статус обязанностей на период отсутствия</h3>
+    <div class="form-group">
+        <label>УРОВЕНЬ ДОСТУПНОСТИ</label>
+        <select id="abs-availability" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="Полное отсутствие – не могу выполнять обязанности ни в каком виде">Полное отсутствие – не могу выполнять обязанности ни в каком виде</option>
+            <option value="Частичное присутствие – могу заходить в Discord, читать каналы, но не участвовать в операциях">Частичное присутствие – могу заходить в Discord, читать каналы, но не участвовать в операциях</option>
+            <option value="Дистанционное выполнение – могу выполнять административную / логистическую работу">Дистанционное выполнение – могу выполнять административную / логистическую работу</option>
+        </select>
+    </div>
+
+    <h3>Замещение</h3>
+    <div class="form-group">
+        <label>НЕОБХОДИМОСТЬ ЗАМЕЩЕНИЯ</label>
+        <select id="abs-substitution-need" class="form-select">
+            <option value="Замещение не требуется">Замещение не требуется</option>
+            <option value="Требуется замещение">Требуется замещение</option>
+            <option value="Вопрос замещения оставляю на усмотрение командования">Вопрос замещения оставляю на усмотрение командования</option>
+        </select>
+    </div>
+
+    <div id="abs-substitution-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ПОЗЫВНОЙ ЗАМЕЩАЮЩЕГО</label>
+            <input type="text" id="abs-sub-callsign" class="form-input" maxlength="8">
+        </div>
+        <div class="form-group">
+            <label>MSF-D-КОД ЗАМЕЩАЮЩЕГО</label>
+            <input type="text" id="abs-sub-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
+        </div>
+        <div class="form-group">
+            <label>ГРЕЙД ЗАМЕЩАЮЩЕГО (ОСНОВНОЙ/КОРПУС)</label>
+            <input type="text" id="abs-sub-grade" class="form-input" placeholder="пример: K3/SSC">
+        </div>
+        <div class="form-group">
+            <label>ПЕРЕДАННЫЕ ЗАДАЧИ / ОБЯЗАННОСТИ (до 128 символов)</label>
+            <textarea id="abs-sub-tasks" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов / -"></textarea>
+        </div>
+    </div>
+
+    <h3>Дополнительная информация</h3>
+    <div class="form-group">
+        <label>ПРИМЕЧАНИЯ (до 256 символов)</label>
+        <textarea id="abs-notes" class="form-textarea" maxlength="256" rows="3" placeholder="до 256 символов / -"></textarea>
+    </div>
+</div>
