@@ -1,0 +1,180 @@
+<!-- Форма рапорта о повышении -->
+<div id="promotion-form" class="report-form">
+    <h3>Данные заявителя</h3>
+    <div class="form-group">
+        <label>ПОЗЫВНОЙ (ЗАЯВИТЕЛЬ)</label>
+        <input type="text" id="promo-callsign1" class="form-input" placeholder="пример: HAWK" maxlength="8">
+    </div>
+    <div class="form-group">
+        <label>MSF-D-КОД (ЗАЯВИТЕЛЬ)</label>
+        <input type="text" id="promo-msfcode1" class="form-input" placeholder="MSF-D-XXXXXX-X">
+    </div>
+    <div class="form-group">
+        <label>ГРЕЙД (ЗАЯВИТЕЛЬ)</label>
+        <select id="promo-grade1" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="K1">K1</option>
+            <option value="K2">K2</option>
+            <option value="K3">K3</option>
+            <option value="K4">K4</option>
+            <option value="K5">K5</option>
+            <option value="K6">K6</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>ДОЛЖНОСТЬ (ЗАЯВИТЕЛЬ)</label>
+        <select id="promo-position" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="Модератор">Модератор</option>
+            <option value="Инструктор">Инструктор</option>
+            <option value="Аналитик">Аналитик</option>
+            <option value="Логист">Логист</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>КОРПУС (ЗАЯВИТЕЛЬ)</label>
+        <select id="promo-service1" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="SSC">SSC</option>
+            <option value="RSC">RSC</option>
+            <option value="MSC">MSC</option>
+            <option value="TSC">TSC</option>
+        </select>
+    </div>
+
+    <h3>Данные предоставляемого оперативника</h3>
+    <div class="form-group">
+        <label>ПОЗЫВНОЙ (ПРЕДОСТАВЛЯЕМЫЙ)</label>
+        <input type="text" id="promo-callsign2" class="form-input" placeholder="пример: WOLF" maxlength="8">
+    </div>
+    <div class="form-group">
+        <label>MSF-D-КОД (ПРЕДОСТАВЛЯЕМЫЙ)</label>
+        <input type="text" id="promo-msfcode2" class="form-input" placeholder="MSF-D-XXXXXX-X">
+    </div>
+    <div class="form-group">
+        <label>ГРЕЙД (ПРЕДОСТАВЛЯЕМЫЙ)</label>
+        <select id="promo-grade2" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="K1">K1</option>
+            <option value="K2">K2</option>
+            <option value="K3">K3</option>
+            <option value="K4">K4</option>
+            <option value="K5">K5</option>
+            <option value="K6">K6</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>КОРПУС (ПРЕДОСТАВЛЯЕМЫЙ)</label>
+        <select id="promo-service2" class="form-select" data-service-select="promo">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="SSC">SSC</option>
+            <option value="RSC">RSC</option>
+            <option value="MSC">MSC</option>
+            <option value="TSC">TSC</option>
+        </select>
+    </div>
+
+    <h3>Обстоятельства</h3>
+    <div class="form-group">
+        <label>ДАТА ОПЕРАЦИИ / МЕРОПРИЯТИЯ</label>
+        <input type="date" id="promo-date" class="form-input">
+    </div>
+    <div class="form-group">
+        <label>ОСНОВАНИЕ</label>
+        <select id="promo-basis" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="operation">Операция</option>
+            <option value="event">Мероприятие</option>
+        </select>
+    </div>
+
+    <div id="promo-operation-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>НАИМЕНОВАНИЕ ОПЕРАЦИИ</label>
+            <input type="text" id="promo-operation-name" class="form-input" maxlength="32" placeholder="до 32 символов">
+        </div>
+        <div class="form-group">
+            <label>КРАТКОЕ ОПИСАНИЕ ОПЕРАЦИИ</label>
+            <textarea id="promo-operation-desc" class="form-textarea" maxlength="128" rows="3" placeholder="до 128 символов"></textarea>
+        </div>
+    </div>
+
+    <div id="promo-event-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ТИП МЕРОПРИЯТИЯ</label>
+            <select id="promo-event-type" class="form-select">
+                <option value="">-- ВЫБЕРИТЕ --</option>
+                <option value="Боевая операция">Боевая операция</option>
+                <option value="Тренировка">Тренировка</option>
+                <option value="Рейд">Рейд</option>
+                <option value="Аттестация">Аттестация</option>
+                <option value="Иное">Иное</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>КРАТКОЕ ОПИСАНИЕ МЕРОПРИЯТИЯ</label>
+            <textarea id="promo-event-desc" class="form-textarea" maxlength="128" rows="3" placeholder="до 128 символов"></textarea>
+        </div>
+    </div>
+
+    <h3>Оценка действий</h3>
+    <div class="form-group">
+        <label>ТАКТИЧЕСКАЯ ГРАМОТНОСТЬ (до 256 символов)</label>
+        <textarea id="promo-tactical" class="form-textarea" maxlength="256" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ВЗАИМОДЕЙСТВИЕ С ГРУППОЙ (до 256 символов)</label>
+        <textarea id="promo-teamwork" class="form-textarea" maxlength="256" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ВЛАДЕНИЕ ОРУЖИЕМ И СНАРЯЖЕНИЕМ (до 256 символов)</label>
+        <textarea id="promo-weapon" class="form-textarea" maxlength="256" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ИНИЦИАТИВА И ЛИДЕРСКИЕ КАЧЕСТВА (до 256 символов)</label>
+        <textarea id="promo-leadership" class="form-textarea" maxlength="256" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ДОПОЛНИТЕЛЬНЫЕ НАБЛЮДЕНИЯ (до 256 символов)</label>
+        <textarea id="promo-extra" class="form-textarea" maxlength="256" rows="2"></textarea>
+    </div>
+
+    <h3>Рекомендация</h3>
+    <div class="form-group">
+        <label>ТИП ПОВЫШЕНИЯ</label>
+        <select id="promo-type" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="combat">О повышении основного боевого грейда</option>
+            <option value="specialized">О повышении уровня корпуса</option>
+        </select>
+    </div>
+
+    <div id="promo-combat-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>НОВЫЙ ГРЕЙД</label>
+            <select id="promo-new-grade" class="form-select">
+                <option value="">-- ВЫБЕРИТЕ --</option>
+                <option value="K1">K1</option>
+                <option value="K2">K2</option>
+                <option value="K3">K3</option>
+                <option value="K4">K4</option>
+                <option value="K5">K5</option>
+                <option value="K6">K6</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="promo-specialized-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>КОРПУС</label>
+            <select id="promo-specialized-grade" class="form-select">
+                <option value="">-- ВЫБЕРИТЕ --</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>ОБОСНОВАНИЕ (до 128 символов)</label>
+        <textarea id="promo-justification" class="form-textarea" maxlength="128" rows="2"></textarea>
+    </div>
+</div>

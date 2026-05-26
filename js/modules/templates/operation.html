@@ -1,0 +1,116 @@
+<!-- Форма рапорта о результате операции -->
+<div id="operation-form" class="report-form">
+    <h3>Данные заявителя</h3>
+    <div class="form-group">
+        <label>ПОЗЫВНОЙ (КОМАНДИР ОПЕРАЦИИ)</label>
+        <input type="text" id="op-callsign" class="form-input" placeholder="пример: HAWK" maxlength="8">
+    </div>
+    <div class="form-group">
+        <label>MSF-D-КОД</label>
+        <input type="text" id="op-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
+    </div>
+    <div class="form-group">
+        <label>ДОЛЖНОСТЬ</label>
+        <select id="op-position" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="Командир отделения">Командир отделения</option>
+            <option value="Командир взвода">Командир взвода</option>
+            <option value="Начальник штаба">Начальник штаба</option>
+            <option value="Зам. командира">Зам. командира</option>
+        </select>
+    </div>
+
+    <h3>Данные операции</h3>
+    <div class="form-group">
+        <label>НАИМЕНОВАНИЕ ОПЕРАЦИИ</label>
+        <input type="text" id="op-name" class="form-input" maxlength="64" placeholder='например: "Чистилище", "Стальной кулак"'>
+    </div>
+    <div class="form-group">
+        <label>КОД ОПЕРАЦИИ</label>
+        <input type="text" id="op-code" class="form-input" maxlength="16" placeholder="OP-XXXX">
+    </div>
+    <div class="form-row">
+        <div class="form-group half">
+            <label>ДАТА ПРОВЕДЕНИЯ</label>
+            <input type="date" id="op-date" class="form-input">
+        </div>
+        <div class="form-group half">
+            <label>ВРЕМЯ ПРОВЕДЕНИЯ</label>
+            <input type="time" id="op-time" class="form-input">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>ЛОКАЦИЯ / КАРТА</label>
+        <input type="text" id="op-location" class="form-input" placeholder="например: Чёрное море, Customs, Reserve">
+    </div>
+
+    <h3>Состав группы</h3>
+    <div class="form-group">
+        <label>УЧАСТНИКИ (ПОЗЫВНОЙ | MSF-D-КОД | ГРЕЙД)</label>
+        <textarea id="op-participants" class="form-textarea" rows="4" placeholder="пример:&#10;HAWK | MSF-D-123456-7 | K3/SSC&#10;WOLF | MSF-D-234567-8 | K2/RSC&#10;RAVEN | MSF-D-345678-9 | K1/MSC"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ОБЩАЯ ЧИСЛЕННОСТЬ ГРУППЫ</label>
+        <input type="number" id="op-total-count" class="form-input" min="1" max="50" placeholder="количество бойцов">
+    </div>
+
+    <h3>Результаты операции</h3>
+    <div class="form-group">
+        <label>СТАТУС ВЫПОЛНЕНИЯ</label>
+        <select id="op-status" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="УСПЕШНО — все задачи выполнены">УСПЕШНО — все задачи выполнены</option>
+            <option value="ЧАСТИЧНО УСПЕШНО — основные задачи выполнены, есть потери">ЧАСТИЧНО УСПЕШНО — основные задачи выполнены, есть потери</option>
+            <option value="НЕУДАЧНО — задачи не выполнены">НЕУДАЧНО — задачи не выполнены</option>
+            <option value="ПРЕРВАНА — операция прервана по техническим причинам">ПРЕРВАНА — операция прервана по техническим причинам</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>ЗАДАЧИ ОПЕРАЦИИ</label>
+        <textarea id="op-tasks" class="form-textarea" rows="3" placeholder="1. Захват объекта Альфа&#10;2. Ликвидация целей&#10;3. Эвакуация союзников"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ДОСТИГНУТЫЕ РЕЗУЛЬТАТЫ</label>
+        <textarea id="op-results" class="form-textarea" rows="3" placeholder="что удалось выполнить"></textarea>
+    </div>
+
+    <h3>Потери и трофеи</h3>
+    <div class="form-group">
+        <label>ПОТЕРИ СО СТОРОНЫ ЧВК</label>
+        <textarea id="op-losses" class="form-textarea" rows="3" placeholder="пример:&#10;RAVEN (K1/MSC) — ранен, эвакуирован&#10;SNAKE — лёгкая контузия, остался в строю"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ПОТЕРИ ПРОТИВНИКА (по оценке)</label>
+        <input type="text" id="op-enemy-losses" class="form-input" placeholder="например: 12 уничтожено, 3 ранено">
+    </div>
+    <div class="form-group">
+        <label>ЗАХВАЧЕННЫЕ ТРОФЕИ</label>
+        <textarea id="op-trophies" class="form-textarea" rows="2" placeholder="оружие, снаряжение, документы, техника"></textarea>
+    </div>
+
+    <h3>Анализ и рекомендации</h3>
+    <div class="form-group">
+        <label>ПРОБЛЕМЫ И НЕДОСТАТКИ</label>
+        <textarea id="op-problems" class="form-textarea" rows="3" maxlength="256" placeholder="что пошло не так, ошибки в планировании/исполнении"></textarea>
+    </div>
+    <div class="form-group">
+        <label>УСПЕШНЫЕ ДЕЙСТВИЯ</label>
+        <textarea id="op-successes" class="form-textarea" rows="3" maxlength="256" placeholder="что сработало хорошо, кого отметить"></textarea>
+    </div>
+    <div class="form-group">
+        <label>РЕКОМЕНДАЦИИ НА БУДУЩЕЕ</label>
+        <textarea id="op-recommendations" class="form-textarea" rows="3" maxlength="256" placeholder="что улучшить, какие изменения внести"></textarea>
+    </div>
+
+    <h3>Приложения</h3>
+    <div class="checkbox-group">
+        <label class="checkbox-label"><input type="checkbox" id="op-app-screenshots"> Скриншоты/видео</label>
+        <label class="checkbox-label"><input type="checkbox" id="op-app-logs"> Лог боя</label>
+        <label class="checkbox-label"><input type="checkbox" id="op-app-replay"> Запись реплея</label>
+        <label class="checkbox-label"><input type="checkbox" id="op-app-mission"> Журнал миссии</label>
+    </div>
+    <div class="form-group">
+        <label>ССЫЛКИ НА МАТЕРИАЛЫ</label>
+        <input type="text" id="op-app-links" class="form-input" placeholder="ссылки на скриншоты, видео, документы">
+    </div>
+</div>

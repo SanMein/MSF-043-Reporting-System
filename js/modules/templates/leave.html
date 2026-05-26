@@ -1,17 +1,17 @@
-<!-- Форма рапорта об отсутствии -->
-<div id="absence-form" class="report-form">
+<!-- Форма рапорта об отпуске -->
+<div id="leave-form" class="report-form">
     <h3>Данные заявителя</h3>
     <div class="form-group">
         <label>ПОЗЫВНОЙ</label>
-        <input type="text" id="abs-callsign" class="form-input" placeholder="пример: HAWK" maxlength="8">
+        <input type="text" id="leave-callsign" class="form-input" placeholder="пример: CLOAKER" maxlength="8">
     </div>
     <div class="form-group">
         <label>MSF-D-КОД</label>
-        <input type="text" id="abs-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
+        <input type="text" id="leave-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
     </div>
     <div class="form-group">
         <label>ОСНОВНОЙ ГРЕЙД</label>
-        <select id="abs-grade" class="form-select">
+        <select id="leave-grade" class="form-select">
             <option value="">-- ВЫБЕРИТЕ --</option>
             <option value="Ku">Ku</option>
             <option value="K1">K1</option>
@@ -24,7 +24,7 @@
     </div>
     <div class="form-group">
         <label>КОРПУС</label>
-        <select id="abs-service" class="form-select">
+        <select id="leave-service" class="form-select">
             <option value="Отсутствует">Отсутствует</option>
             <option value="SSC">SSC</option>
             <option value="RSC">RSC</option>
@@ -34,8 +34,8 @@
         </select>
     </div>
     <div class="form-group">
-        <label>ДОЛЖНОСТЬ</label>
-        <select id="abs-position" class="form-select">
+        <label>ДОЛЖНОСТЬ (при наличии)</label>
+        <select id="leave-position" class="form-select">
             <option value="Отсутствует">Отсутствует</option>
             <option value="Модератор">Модератор</option>
             <option value="Инструктор">Инструктор</option>
@@ -44,54 +44,61 @@
         </select>
     </div>
 
-    <h3>Период отсутствия</h3>
+    <h3>Период запрашиваемого отпуска</h3>
     <div class="form-row">
         <div class="form-group half">
             <label>НАЧАЛО (ДАТА)</label>
-            <input type="date" id="abs-start-date" class="form-input">
+            <input type="date" id="leave-start-date" class="form-input">
         </div>
         <div class="form-group half">
             <label>НАЧАЛО (ВРЕМЯ)</label>
-            <input type="time" id="abs-start-time" class="form-input">
+            <input type="time" id="leave-start-time" class="form-input">
         </div>
     </div>
-    <div class="form-group">
-        <label>ОКОНЧАНИЕ (ДАТА)</label>
-        <input type="date" id="abs-end-date" class="form-input">
-    </div>
-    <div class="form-group">
-        <label>ОРИЕНТИРОВОЧНАЯ ПРОДОЛЖИТЕЛЬНОСТЬ</label>
-        <input type="text" id="abs-duration" class="form-input" placeholder='пример: "3 дня" / "5 часов"'>
+    <div class="form-row">
+        <div class="form-group half">
+            <label>ОКОНЧАНИЕ (ДАТА)</label>
+            <input type="date" id="leave-end-date" class="form-input">
+        </div>
+        <div class="form-group half">
+            <label>ОКОНЧАНИЕ (ВРЕМЯ)</label>
+            <input type="time" id="leave-end-time" class="form-input">
+        </div>
     </div>
 
-    <h3>Причина отсутствия</h3>
+    <div class="form-group">
+        <label>ИЛИ ОРИЕНТИРОВОЧНАЯ ПРОДОЛЖИТЕЛЬНОСТЬ</label>
+        <input type="text" id="leave-duration" class="form-input" placeholder='пример: "3 дня" / "5 часов"'>
+    </div>
+
+    <h3>Причина отпуска</h3>
     <div class="form-group">
         <label>ОСНОВНАЯ КАТЕГОРИЯ</label>
-        <select id="abs-reason-cat" class="form-select">
+        <select id="leave-reason-cat" class="form-select">
             <option value="">-- ВЫБЕРИТЕ --</option>
             <option value="Личные обстоятельства">Личные обстоятельства</option>
             <option value="Медицинская необходимость">Медицинская необходимость</option>
-            <option value="Техническая невозможность">Техническая невозможность</option>
-            <option value="Логистическая невозможность">Логистическая невозможность</option>
-            <option value="Учебная / Рабочая занятость">Учебная / Рабочая занятость</option>
+            <option value="Техническая невозможность (проблемы с ПК / сетью / софтом)">Техническая невозможность (проблемы с ПК / сетью / софтом)</option>
+            <option value="Логистическая невозможность (отъезд / переезд / командировка)">Логистическая невозможность (отъезд / переезд / командировка)</option>
+            <option value="Учебная / рабочая занятость">Учебная / рабочая занятость</option>
             <option value="Иное">Иное</option>
         </select>
     </div>
-    <div id="abs-reason-other-block" class="conditional-block hidden">
+    <div id="leave-reason-other-block" class="conditional-block hidden">
         <div class="form-group">
-            <label>ДЕТАЛИЗАЦИЯ ПРИЧИНЫ (до 128 символов)</label>
-            <input type="text" id="abs-reason-other" class="form-input" maxlength="128" placeholder="до 128 символов">
+            <label>ИНОЕ (УКАЗАТЬ)</label>
+            <input type="text" id="leave-reason-other" class="form-input" maxlength="128" placeholder="укажите причину">
         </div>
     </div>
     <div class="form-group">
-        <label>ДЕТАЛИЗАЦИЯ ПРИЧИНЫ (до 64 символов)</label>
-        <input type="text" id="abs-reason-detail" class="form-input" maxlength="64" placeholder="до 64 символов">
+        <label>ДЕТАЛИЗАЦИЯ ПРИЧИНЫ</label>
+        <textarea id="leave-reason-detail" class="form-textarea" maxlength="256" rows="2" placeholder="Краткое пояснение. Если причина носит личный характер, допустимо указать &quot;По семейным обстоятельствам&quot; без дополнительной детализации."></textarea>
     </div>
 
-    <h3>Статус обязанностей на период отсутствия</h3>
+    <h3>Статус обязанностей на период отпуска</h3>
     <div class="form-group">
         <label>УРОВЕНЬ ДОСТУПНОСТИ</label>
-        <select id="abs-availability" class="form-select">
+        <select id="leave-availability" class="form-select">
             <option value="">-- ВЫБЕРИТЕ --</option>
             <option value="Полное отсутствие – не могу выполнять обязанности ни в каком виде">Полное отсутствие – не могу выполнять обязанности ни в каком виде</option>
             <option value="Частичное присутствие – могу заходить в Discord, читать каналы, но не участвовать в операциях">Частичное присутствие – могу заходить в Discord, читать каналы, но не участвовать в операциях</option>
@@ -102,35 +109,35 @@
     <h3>Замещение</h3>
     <div class="form-group">
         <label>НЕОБХОДИМОСТЬ ЗАМЕЩЕНИЯ</label>
-        <select id="abs-substitution-need" class="form-select">
+        <select id="leave-substitution-need" class="form-select">
             <option value="Замещение не требуется">Замещение не требуется</option>
             <option value="Требуется замещение">Требуется замещение</option>
             <option value="Вопрос замещения оставляю на усмотрение командования">Вопрос замещения оставляю на усмотрение командования</option>
         </select>
     </div>
 
-    <div id="abs-substitution-block" class="conditional-block hidden">
+    <div id="leave-substitution-block" class="conditional-block hidden">
         <div class="form-group">
             <label>ПОЗЫВНОЙ ЗАМЕЩАЮЩЕГО</label>
-            <input type="text" id="abs-sub-callsign" class="form-input" maxlength="8">
+            <input type="text" id="leave-sub-callsign" class="form-input" maxlength="8">
         </div>
         <div class="form-group">
             <label>MSF-D-КОД ЗАМЕЩАЮЩЕГО</label>
-            <input type="text" id="abs-sub-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
+            <input type="text" id="leave-sub-msfcode" class="form-input" placeholder="MSF-D-XXXXXX-X">
         </div>
         <div class="form-group">
-            <label>ГРЕЙД ЗАМЕЩАЮЩЕГО (ОСНОВНОЙ/КОРПУС)</label>
-            <input type="text" id="abs-sub-grade" class="form-input" placeholder="пример: K3/SSC">
+            <label>ГРЕЙД ЗАМЕЩАЮЩЕГО</label>
+            <input type="text" id="leave-sub-grade" class="form-input" placeholder="пример: K3 / SSC-2">
         </div>
         <div class="form-group">
-            <label>ПЕРЕДАННЫЕ ЗАДАЧИ / ОБЯЗАННОСТИ (до 128 символов)</label>
-            <textarea id="abs-sub-tasks" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов / -"></textarea>
+            <label>ПЕРЕДАННЫЕ ЗАДАЧИ / ОБЯЗАННОСТИ</label>
+            <textarea id="leave-sub-tasks" class="form-textarea" rows="3" placeholder="[Задача 1]&#10;[Задача 2]&#10;[Задача 3]"></textarea>
         </div>
     </div>
 
     <h3>Дополнительная информация</h3>
     <div class="form-group">
-        <label>ПРИМЕЧАНИЯ (до 256 символов)</label>
-        <textarea id="abs-notes" class="form-textarea" maxlength="256" rows="3" placeholder="до 256 символов / -"></textarea>
+        <label>ПРИМЕЧАНИЯ</label>
+        <textarea id="leave-notes" class="form-textarea" maxlength="256" rows="3" placeholder="Дополнительная информация / -"></textarea>
     </div>
 </div>

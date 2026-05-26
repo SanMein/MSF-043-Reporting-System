@@ -1,0 +1,282 @@
+<!-- Форма рапорта о дисциплинарном взыскании -->
+<div id="discipline-form" class="report-form">
+    <h3>Данные заявителя</h3>
+    <div class="form-group">
+        <label>ПОЗЫВНОЙ (ЗАЯВИТЕЛЬ)</label>
+        <input type="text" id="disc-callsign1" class="form-input" placeholder="пример: HAWK" maxlength="8">
+    </div>
+    <div class="form-group">
+        <label>MSF-D-КОД (ЗАЯВИТЕЛЬ)</label>
+        <input type="text" id="disc-msfcode1" class="form-input" placeholder="MSF-D-XXXXXX-X">
+    </div>
+    <div class="form-group">
+        <label>ГРЕЙД (ЗАЯВИТЕЛЬ)</label>
+        <select id="disc-grade1" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="K1">K1</option>
+            <option value="K2">K2</option>
+            <option value="K3">K3</option>
+            <option value="K4">K4</option>
+            <option value="K5">K5</option>
+            <option value="K6">K6</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>ДОЛЖНОСТЬ (ЗАЯВИТЕЛЬ)</label>
+        <select id="disc-position" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="Модератор">Модератор</option>
+            <option value="Инструктор">Инструктор</option>
+            <option value="Аналитик">Аналитик</option>
+            <option value="Логист">Логист</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>КОРПУС (ЗАЯВИТЕЛЬ)</label>
+        <select id="disc-service1" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="SSC">SSC</option>
+            <option value="RSC">RSC</option>
+            <option value="MSC">MSC</option>
+            <option value="TSC">TSC</option>
+        </select>
+    </div>
+
+    <h3>Данные оперативника, в отношении которого подаётся рапорт</h3>
+    <div class="form-group">
+        <label>ПОЗЫВНОЙ (НАРУШИТЕЛЬ)</label>
+        <input type="text" id="disc-callsign2" class="form-input" placeholder="пример: WOLF" maxlength="8">
+    </div>
+    <div class="form-group">
+        <label>MSF-D-КОД (НАРУШИТЕЛЬ)</label>
+        <input type="text" id="disc-msfcode2" class="form-input" placeholder="MSF-D-XXXXXX-X">
+    </div>
+    <div class="form-group">
+        <label>ГРЕЙД (НАРУШИТЕЛЬ)</label>
+        <select id="disc-grade2" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="K1">K1</option>
+            <option value="K2">K2</option>
+            <option value="K3">K3</option>
+            <option value="K4">K4</option>
+            <option value="K5">K5</option>
+            <option value="K6">K6</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>КОРПУС (НАРУШИТЕЛЬ)</label>
+        <select id="disc-service2" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="SSC">SSC</option>
+            <option value="RSC">RSC</option>
+            <option value="MSC">MSC</option>
+            <option value="TSC">TSC</option>
+        </select>
+    </div>
+
+    <h3>Обстоятельства нарушения</h3>
+    <div class="form-group">
+        <label>ДАТА ИНЦИДЕНТА</label>
+        <input type="date" id="disc-date" class="form-input">
+    </div>
+    <div class="form-group">
+        <label>МЕСТО ИНЦИДЕНТА</label>
+        <select id="disc-location" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="Канал Discord">Канал Discord</option>
+            <option value="Голосовой канал">Голосовой канал</option>
+            <option value="В ходе операции или мероприятия">В ходе операции или мероприятия</option>
+            <option value="Иное">Иное</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>ТИП НАРУШЕНИЯ</label>
+        <select id="disc-violation-type" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="reglament">Нарушение пункта Регламента</option>
+            <option value="regulation">Нарушение Положения</option>
+            <option value="order">Неисполнение прямого приказа командира</option>
+            <option value="desertion">Дезертирство / самовольное оставление операции</option>
+            <option value="reputation">Действия, нанёсшие ущерб репутации ЧВК</option>
+            <option value="other">Иное</option>
+        </select>
+    </div>
+
+    <div id="disc-reglament-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ПУНКТ РЕГЛАМЕНТА</label>
+            <select id="disc-reglament-point" class="form-select">
+                <option value="">-- ВЫБЕРИТЕ --</option>
+                <option value="3.1">3.1</option>
+                <option value="3.2">3.2</option>
+                <option value="3.3">3.3</option>
+                <option value="3.4">3.4</option>
+                <option value="3.5">3.5</option>
+                <option value="3.6">3.6</option>
+                <option value="4.1">4.1</option>
+                <option value="4.2">4.2</option>
+                <option value="4.3">4.3</option>
+                <option value="4.4">4.4</option>
+                <option value="4.5">4.5</option>
+                <option value="5.1">5.1</option>
+                <option value="5.2">5.2</option>
+                <option value="5.3">5.3</option>
+                <option value="5.4">5.4</option>
+                <option value="5.5">5.5</option>
+                <option value="5.6">5.6</option>
+                <option value="5.7">5.7</option>
+                <option value="5.8">5.8</option>
+                <option value="5.9">5.9</option>
+                <option value="7.1">7.1</option>
+                <option value="7.2">7.2</option>
+                <option value="7.3">7.3</option>
+                <option value="7.4">7.4</option>
+                <option value="7.5">7.5</option>
+                <option value="7.6">7.6</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="disc-regulation-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ПОЛОЖЕНИЕ</label>
+            <select id="disc-regulation-doc" class="form-select">
+                <option value="">-- ВЫБЕРИТЕ --</option>
+                <option value="Положение о системе Карбогрейда личного состава ЧВК «MSF-043»">Положение о системе Карбогрейда личного состава ЧВК "MSF-043"</option>
+                <option value="Положение о порядке оснащения личного состава в режиме «BRM5» ЧВК «MSF-043»">Положение о порядке оснащения личного состава в режиме "BRM5" ЧВК "MSF-043"</option>
+                <option value="Положение о применении системы сигналов и команд ЧВК «MSF-043»">Положение о применении системы сигналов и команд ЧВК "MSF-043"</option>
+                <option value="Положение о применении техники в режиме BRM5 ЧВК «MSF-043»">Положение о применении техники в режиме BRM5 ЧВК "MSF-043"</option>
+                <option value="Положение об унификации экипировки личного состава в режиме «BRM5» ЧВК «MSF-043»">Положение об унификации экипировки личного состава в режиме "BRM5" ЧВК "MSF-043"</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>ПОЯСНЕНИЕ</label>
+            <textarea id="disc-regulation-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+        </div>
+    </div>
+
+    <div id="disc-order-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ПОЯСНЕНИЕ</label>
+            <textarea id="disc-order-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+        </div>
+    </div>
+
+    <div id="disc-desertion-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ПОЯСНЕНИЕ</label>
+            <textarea id="disc-desertion-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+        </div>
+    </div>
+
+    <div id="disc-reputation-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ПОЯСНЕНИЕ</label>
+            <textarea id="disc-reputation-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+        </div>
+    </div>
+
+    <div id="disc-other-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>ПОЯСНЕНИЕ</label>
+            <textarea id="disc-other-desc" class="form-textarea" maxlength="256" rows="2" placeholder="до 256 символов"></textarea>
+        </div>
+    </div>
+
+    <h3>Описание инцидента</h3>
+    <div class="form-group">
+        <label>СУТЬ НАРУШЕНИЯ (до 256 символов)</label>
+        <textarea id="disc-essence" class="form-textarea" maxlength="256" rows="3" placeholder="до 256 символов"></textarea>
+    </div>
+    <div class="form-group">
+        <label>СВИДЕТЕЛИ (ПОЗЫВНОЙ | MSF-D-КОД | ГРЕЙД)</label>
+        <textarea id="disc-witnesses" class="form-textarea" rows="3" placeholder="пример: HAWK | MSF-D-123456-7 | K3 / +"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ПРЕДШЕСТВУЮЩИЕ НАРУШЕНИЯ (до 128 символов)</label>
+        <textarea id="disc-prev-violations" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов / -"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ОБЪЯСНЕНИЯ ОПЕРАТИВНИКА (до 128 символов)</label>
+        <textarea id="disc-explanation" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов / -"></textarea>
+    </div>
+
+    <h3>Рекомендация</h3>
+    <div class="form-group">
+        <label>ВИД ВЗЫСКАНИЯ</label>
+        <select id="disc-penalty-type" class="form-select">
+            <option value="">-- ВЫБЕРИТЕ --</option>
+            <option value="suspension">Временное отстранение от участия в операциях</option>
+            <option value="downgrade-combat">Понижение основного боевого грейда</option>
+            <option value="downgrade-specialized">Понижение уровная корпуса</option>
+            <option value="revoke-specialized">Лишение уровня корпуса</option>
+            <option value="ku-status">Перевод в статус Ку с повторным прохождением аттестации</option>
+            <option value="expulsion">Исключение из состава ЧВК и Перманентный бан</option>
+        </select>
+    </div>
+
+    <div id="disc-suspension-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>СРОК ОТСТРАНЕНИЯ</label>
+            <input type="text" id="disc-suspension-term" class="form-input" maxlength="32" placeholder="до 32 символов">
+        </div>
+    </div>
+
+    <div id="disc-downgrade-combat-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>НОВЫЙ ОСНОВНОЙ ГРЕЙД</label>
+            <select id="disc-new-grade" class="form-select">
+                <option value="">-- ВЫБЕРИТЕ --</option>
+                <option value="K1">K1</option>
+                <option value="K2">K2</option>
+                <option value="K3">K3</option>
+                <option value="K4">K4</option>
+                <option value="K5">K5</option>
+                <option value="K6">K6</option>
+                <option value="Ku">Ku</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="disc-downgrade-specialized-block" class="conditional-block hidden">
+        <div class="form-group">
+            <label>НОВЫЙ УРОВЕНЬ КОРПУСА</label>
+            <select id="disc-new-specialized" class="form-select">
+                <option value="">-- ВЫБЕРИТЕ --</option>
+                <option value="SSC-1">SSC-1</option>
+                <option value="SSC-2">SSC-2</option>
+                <option value="SSC-3">SSC-3</option>
+                <option value="SSC-4">SSC-4</option>
+                <option value="RSC-1">RSC-1</option>
+                <option value="RSC-2">RSC-2</option>
+                <option value="RSC-3">RSC-3</option>
+                <option value="RSC-4">RSC-4</option>
+                <option value="MSC-1">MSC-1</option>
+                <option value="MSC-2">MSC-2</option>
+                <option value="MSC-3">MSC-3</option>
+                <option value="TSC-1">TSC-1</option>
+                <option value="TSC-2">TSC-2</option>
+                <option value="TSC-3">TSC-3</option>
+                <option value="TSC-4">TSC-4</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>ОБОСНОВАНИЕ РЕКОМЕНДУЕМОЙ МЕРЫ (до 128 символов)</label>
+        <textarea id="disc-justification" class="form-textarea" maxlength="128" rows="2" placeholder="до 128 символов"></textarea>
+    </div>
+
+    <h3>Приложения</h3>
+    <div class="checkbox-group">
+        <label class="checkbox-label"><input type="checkbox" id="disc-app-screenshots"> Скриншоты</label>
+        <label class="checkbox-label"><input type="checkbox" id="disc-app-logs"> Записи</label>
+        <label class="checkbox-label"><input type="checkbox" id="disc-app-witness"> Свидетельские показания</label>
+        <label class="checkbox-label"><input type="checkbox" id="disc-app-mission"> Выписка из Журнала боевых миссий</label>
+    </div>
+    <div class="form-group">
+        <label>ИНОЕ (до 64 символов)</label>
+        <input type="text" id="disc-app-other" class="form-input" maxlength="64" placeholder="до 64 символов">
+    </div>
+</div>
