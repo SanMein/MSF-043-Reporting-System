@@ -1,9 +1,11 @@
-/* css/report-style.css */
+/* css/report-style.css - Стиль для заполнителя рапортов */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
 :root {
     --bg-body: #121212;
@@ -19,8 +21,7 @@
     --danger-color: #cf6679;
     --success-color: #03dac6;
     --warning-color: #ffb74d;
-    --font-main: 'Courier New', Courier, monospace;
-    --font-ui: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-main: 'Montserrat', 'Segoe UI', sans-serif;
     --radius: 4px;
 }
 
@@ -73,6 +74,7 @@ body {
 .title h1 {
     font-family: var(--font-main);
     font-size: 1.25rem;
+    font-weight: 700;
     color: var(--text-accent);
     letter-spacing: 2px;
     margin: 0;
@@ -81,6 +83,7 @@ body {
 .subtitle {
     font-family: var(--font-main);
     font-size: 0.75rem;
+    font-weight: 500;
     color: var(--text-muted);
     letter-spacing: 1px;
 }
@@ -120,6 +123,7 @@ body {
 .panel h2 {
     font-family: var(--font-main);
     font-size: 1.25rem;
+    font-weight: 700;
     color: var(--text-accent);
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
@@ -173,7 +177,7 @@ body {
     display: block;
     font-family: var(--font-main);
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 700;
     color: var(--text-main);
     margin-bottom: 0.3rem;
 }
@@ -182,6 +186,7 @@ body {
     display: block;
     font-family: var(--font-main);
     font-size: 0.75rem;
+    font-weight: 500;
     color: var(--text-muted);
 }
 
@@ -211,6 +216,7 @@ body {
 .form-column h3 {
     font-family: var(--font-main);
     font-size: 1.10rem;
+    font-weight: 600;
     color: var(--text-accent);
     border-left: 3px solid var(--accent-color);
     padding-left: 0.75rem;
@@ -229,6 +235,7 @@ body {
     display: block;
     font-family: var(--font-main);
     font-size: 0.75rem;
+    font-weight: 600;
     color: var(--text-accent);
     letter-spacing: 1px;
     margin-bottom: 0.4rem;
@@ -242,7 +249,7 @@ body {
     padding: 0.6rem 0.8rem;
     color: var(--text-main);
     font-family: var(--font-main);
-    font-size: 1rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
@@ -288,11 +295,19 @@ body {
     background: var(--bg-header);
     font-family: var(--font-main);
     font-size: 0.75rem;
+    font-weight: 600;
     color: var(--text-accent);
     letter-spacing: 1px;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-.copy-preview-btn {
+.preview-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.copy-preview-btn, .send-webhook-btn {
     padding: 0.3rem 0.8rem;
     background-color: transparent;
     border: 1px solid var(--success-color);
@@ -300,7 +315,7 @@ body {
     color: var(--success-color);
     font-family: var(--font-main);
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -310,23 +325,25 @@ body {
     box-shadow: 0 0 8px rgba(3, 218, 198, 0.3);
 }
 
+.send-webhook-btn {
+    border-color: var(--accent-color);
+    color: var(--text-accent);
+}
+
+.send-webhook-btn:hover {
+    background-color: rgba(124, 77, 255, 0.15);
+    box-shadow: 0 0 8px rgba(124, 77, 255, 0.3);
+}
+
 .report-preview {
     padding: 1.5rem;
     overflow-y: auto;
     flex: 1;
     font-family: var(--font-main);
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.5;
     white-space: pre-wrap;
     word-break: break-word;
-}
-
-.report-preview h1, .report-preview h2 {
-    font-family: var(--font-main);
-}
-
-.report-preview p {
-    margin-bottom: 0.5rem;
 }
 
 .preview-placeholder {
@@ -355,7 +372,7 @@ body {
 
 .access-input {
     font-family: var(--font-main);
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .access-input span {
@@ -388,7 +405,7 @@ body {
     border-radius: var(--radius);
     color: var(--text-main);
     font-family: var(--font-main);
-    font-size: 1rem;
+    font-size: 0.9rem;
     z-index: 2001;
     opacity: 0;
     transform: translateX(100%);
@@ -422,6 +439,22 @@ body {
 
     .footer-content {
         justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .preview-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .preview-buttons {
+        justify-content: center;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }
 
@@ -472,49 +505,4 @@ body {
 .form-group.half {
     flex: 1;
     margin-bottom: 0;
-}
-
-.conditional-block {
-    margin-top: 0.5rem;
-    padding-left: 0.5rem;
-    border-left: 2px solid var(--accent-color);
-}
-
-.conditional-block.hidden {
-    display: none;
-}
-
-.report-preview hr {
-    border-color: var(--border-color);
-    margin: 0.5rem 0;
-}
-
-.report-preview blockquote {
-    border-left: 2px solid var(--accent-color);
-    margin: 0.5rem 0;
-    padding-left: 1rem;
-    color: var(--text-muted);
-}
-
-.preview-buttons {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.send-webhook-btn {
-    padding: 0.3rem 0.8rem;
-    background-color: transparent;
-    border: 1px solid var(--accent-color);
-    border-radius: var(--radius);
-    color: var(--text-accent);
-    font-family: var(--font-main);
-    font-size: 0.75rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.send-webhook-btn:hover {
-    background-color: rgba(124, 77, 255, 0.2);
-    box-shadow: 0 0 8px rgba(124, 77, 255, 0.4);
 }
